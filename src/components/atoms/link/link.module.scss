@@ -1,0 +1,17 @@
+.link {
+  text-decoration: none;
+}
+
+.default {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.menuLink {
+  opacity: 0.5; 
+  &:hover {
+    text-decoration: none;
+    opacity: 1;
+  }
+}

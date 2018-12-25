@@ -1,0 +1,80 @@
+@import "../../../utils/variables";
+
+.container {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+.bottomLayer {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+}
+
+.topLayer {
+  opacity: 0;
+
+  @media (min-width: $bp-mobile) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  
+    z-index: 1;
+  
+    display: flex;
+    flex-direction: column;
+  
+    transition: opacity 1s, visibility 1s;
+
+    opacity: 1;
+  }
+}
+
+.revealed {
+  opacity: 0;
+}
+
+.spacing {
+  background-color: $main-bg;
+  flex-grow: 1;
+}
+
+.maskCont {
+  display: flex;
+}
+
+.svg {
+  width: 70vw;
+  height: 15vw;
+
+  .maskRect {
+    fill: $main;
+  }
+
+  text {
+    font-size: 10vw;
+    font-weight: 700;
+
+    text-transform: uppercase;
+  }
+
+  rect {
+    fill: $main-bg;
+  }
+
+  @media (min-width: $bp-laptop) {
+    width: 855px;
+    height: 245px;
+
+    text {
+      font-size: 122px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import "../../../utils/variables";
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.wrapItem {
+  opacity: 0;
+  transition: opacity 0.5s;
+  flex-grow: 1;
+  max-width: 100%;
+
+  padding: 1rem;
+
+  @media (min-width: $bp-mobile) {
+    width: 33.3%;
+  }
+
+  & > div {
+    margin: 0 auto;
+  }
+}
+
+.revealed {
+  opacity: 1;
+}

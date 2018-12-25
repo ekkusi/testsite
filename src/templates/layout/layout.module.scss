@@ -1,0 +1,26 @@
+@import "../../utils/variables";
+
+.heroText {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+
+  font-size: 2rem;
+
+  max-width: 70%;
+
+  @media (min-width: $bp-mobile) {
+    font-size: 2.5rem;
+
+    max-width: 500px;
+  }
+}
+
+.menuButton {
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  color: white;
+
+  z-index: 300;
+}
