@@ -12,7 +12,7 @@ export const CardTheme = {
 const Card = ({ theme, width, height, bgImg, children, className }) => (
   <div 
     className={classnames(styles.card, styles[theme], className)} 
-    style={{backgroundImage: `url(${bgImg}`, width: width, height: height}}
+    style={{backgroundImage: `url(${bgImg})`, width: width, height: height}}
   >
     <div className={classnames(styles.center)}>
       {children}
