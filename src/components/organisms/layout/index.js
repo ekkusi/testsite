@@ -2,12 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import classnames from 'classnames'
 
+import '../../../utils/fontawesome'
+
 import styles from './layout.module.scss'
-import SvgTextOverlay from '../../components/organisms/svg-text-overlay'
-import RandomizingText from '../../components/molecules/randomizing-text'
-import Menu from '../../components/organisms/full-screen-menu'
-import Hamburger, { HamburgerTheme } from '../../components/atoms/hamburger'
-import ScrollWrapper from '../../components/eventlisteners/ScrollWrapper'
+import SvgTextOverlay from '../svg-text-overlay/index'
+import BgImg, { ImageTheme } from '../../atoms/image/index'
+import RandomizingText from '../../molecules/randomizing-text/index'
+import Menu from '../full-screen-menu/index'
+import MenuButton, { HamburgerTheme } from '../../atoms/hamburger/index'
+import ScrollWrapper from '../../eventlisteners/ScrollWrapper'
 
 class Layout extends React.Component {
   constructor(props) {
@@ -28,7 +31,9 @@ class Layout extends React.Component {
   }
 
   handleScroll() {
-    if (window.pageYOffset > this.heroRef.current.clientHeight + this.contentRef.current.clientHeight / 2) {
+    const heroHeight = this.heroRef.current.clientHeight;
+    const contentHeight = this.contentRef.current.clientHeight;
+    if (window.pageYOffset > heroHeight + contentHeight / 5) {
       this.setState({
         isHeroVisible: false
       })
@@ -37,7 +42,7 @@ class Layout extends React.Component {
         isHeroVisible: true
       })
     }
-    if (window.pageYOffset > this.heroRef.current.clientHeight / 1.5) {
+    if (window.pageYOffset > heroHeight * 0.7) {
       this.setState({
         isFooterVisible: true
       })
@@ -55,22 +60,23 @@ class Layout extends React.Component {
   }
 
   render() {
-    const texts = [
-      'Fugiat Lorem magna eu exercitation qui anim',
-      'Id amet amet fugiat sit',
-      'Aute fugiat proident velit amet est sit culpa cillum quis'
-    ]
-  
+    const {
+      heroImg,
+      heroTexts,
+      companyName,
+    } = this.props;
+
     return (
       <ScrollWrapper scrollHandler={this.handleScroll} render={() => (
         <Container>
           <HeroContainer ref={this.heroRef} isHeroVisible={this.state.isHeroVisible}>
-            <SvgTextOverlay maskText="Hover me">
-              <StyledVideo loop muted autoPlay poster="images/videoposter.jpg">
+            <BgImg theme={ImageTheme.BACKGROUND} img={heroImg} />
+            <SvgTextOverlay maskText={companyName}>
+              <StyledVideo loop muted autoPlay>
                 <source src="videos/bgvideo2.mp4" type="video/mp4" />
               </StyledVideo>
               <div className={classnames(styles.heroText)}>
-                <RandomizingText texts={texts} />
+                <RandomizingText texts={heroTexts} />
               </div>
             </SvgTextOverlay>
           </HeroContainer>
@@ -80,9 +86,8 @@ class Layout extends React.Component {
           <Footer ref={this.footerRef} isFooterVisible={this.state.isFooterVisible}>
             <Text>Jotain</Text>
           </Footer>
-          <Menu isMenuOpen={this.state.isMenuOpen}>
-          </Menu>
-          <Hamburger theme={HamburgerTheme.MINUS} className={classnames(styles.menuButton)} onClick={this.handleMenuClick} isMenuOpen={this.state.isMenuOpen} />
+          <Menu isMenuOpen={this.state.isMenuOpen} />
+          <MenuButton theme={HamburgerTheme.MINUS} className={classnames(styles.menuButton)} onClick={this.handleMenuClick} isMenuOpen={this.state.isMenuOpen} />
         </Container>
       )} />
     )
@@ -96,7 +101,6 @@ const Container = styled.div`
 `
 
 const HeroContainer = styled.div`
-  display: ${({ isHeroVisible }) => isHeroVisible ? 'block' : 'none'};
   opacity: ${({ isHeroVisible }) => isHeroVisible ? 1 : 0};
 
   position: fixed;
@@ -107,6 +111,10 @@ const HeroContainer = styled.div`
 `
 
 const StyledVideo = styled.video`
+  background-image: url(${({ bgImg }) => bgImg});
+  background-size: cover;
+  background-position: center center;
+
   position: absolute;
   top: 50%;
   left: 50%;

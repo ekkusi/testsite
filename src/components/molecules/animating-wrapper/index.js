@@ -85,14 +85,14 @@ class Wrapper extends React.Component {
 Wrapper.propTypes = {
   theme: PropTypes.oneOf(Object.values(WrapperTheme)),
   revealOnMount: PropTypes.bool,
-  children: PropTypes.node,
+  children: PropTypes.array,
   className: PropTypes.string
 }
 
 Wrapper.defaultProps = {
   theme: WrapperTheme.DEFAULT,
   revealOnMount: true,
-  children: '',
+  children: [],
   className: ''
 }
 

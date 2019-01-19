@@ -1,80 +1,55 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import '../utils/fontawesome'
-import Layout from '../templates/layout/index'
-import TwoSidedCard from '../components/molecules/two-sided-card/index'
-import Card from '../components/atoms/card/index'
-import Row from '../components/atoms/row/index'
-import TitledButton from '../components/molecules/titled-button/index'
-import Icon, { HoverTheme } from '../components/atoms/icon/index'
-import Feature from '../components/organisms/feature/index'
+import Layout from '../components/organisms/layout/index'
+import Block from '../components/molecules/center-block/index'
 
-export default () => {
+export default ({ data: { homepage, general } }) => {
+  const heroTexts = homepage.heroTexts.map(text => text.text);
+
   return (
-    <Layout>
+    <Layout heroImg={homepage.heroImage.fluid} heroTexts={heroTexts} companyName={general.companyName}>
       <Content>
-        <Feature title="Heading">
-          <TwoSidedCard imageUrl="/images/hero-image.jpeg" frontTitle="Title">
-            <TitledButton titleText="Hello World" buttonClick={() => {}} buttonText="Button" />
-            <Row>
-              <Icon theme="circle" iconName={["fab", "facebook-f"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "twitter"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "instagram"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-            </Row>
-          </TwoSidedCard>
-          <TwoSidedCard imageUrl="/images/hero-image.jpeg" frontTitle="Title">
-            <TitledButton titleText="Hello World" buttonClick={() => {}} buttonText="Button" />
-            <Row>
-              <Icon theme="circle" iconName={["fab", "facebook-f"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "twitter"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "instagram"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-            </Row>
-          </TwoSidedCard>
-          <TwoSidedCard imageUrl="/images/hero-image.jpeg" frontTitle="Title">
-            <TitledButton titleText="Hello World" buttonClick={() => {}} buttonText="Button" />
-            <Row>
-              <Icon theme="circle" iconName={["fab", "facebook-f"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "twitter"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "instagram"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-            </Row>
-          </TwoSidedCard>
-        </Feature>
-      </Content>
-      <Content>
-        <Feature title="Heading">
-          <Card>
-            <TitledButton titleText="Hello World" buttonClick={() => {}} buttonText="Button" />
-            <Row>
-              <Icon theme="circle" iconName={["fab", "facebook-f"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "twitter"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "instagram"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-            </Row>
-          </Card>
-          <Card>
-            <TitledButton titleText="Hello World" buttonClick={() => {}} buttonText="Button" />
-            <Row>
-              <Icon theme="circle" iconName={["fab", "facebook-f"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "twitter"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "instagram"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-            </Row>
-          </Card>
-          <Card>
-            <TitledButton titleText="Hello World" buttonClick={() => {}} buttonText="Button" />
-            <Row>
-              <Icon theme="circle" iconName={["fab", "facebook-f"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "twitter"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-              <Icon theme="circle" iconName={["fab", "instagram"]} isLink={true} hoverTheme={HoverTheme.OPACITY} />
-            </Row>
-          </Card>
-        </Feature>
+        <Center>
+          <Block>
+            <p>
+              Deserunt elit incididunt minim aute sint fugiat aliqua sint laboris. Adipisicing aliqua proident officia nostrud. Quis in qui cupidatat adipisicing sint nisi veniam commodo irure quis adipisicing velit occaecat. Ex adipisicing labore id nostrud id irure consequat ad nulla esse Lorem. Dolor sit nulla excepteur consequat sint quis veniam ad ex et laboris consequat Lorem fugiat.
+            </p>
+          </Block>
+        </Center>
       </Content>
     </Layout>
   )
 }
 
-
-
 const Content = styled.div`
   position: relative;
+`
+
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  min-height: 100vh;
+  width: 100%;
+`
+
+export const query = graphql`
+  query HomepageQuery {
+    homepage: datoCmsHomepage {
+      heroTexts {
+        text
+      }
+      heroImage {
+        fluid(maxWidth: 1920, imgixParams: { fm: "jpg", auto: "compress" }) {
+          ...GatsbyDatoCmsFluid
+        }
+      }
+    }
+    general: datoCmsGeneralInfo {
+      companyName
+    }
+  }
 `

@@ -28,7 +28,7 @@ class ScrollWrapper extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={this.props.className}>
         {this.props.render()}
       </div>
     )
@@ -36,7 +36,15 @@ class ScrollWrapper extends React.Component {
 }
 
 ScrollWrapper.propTypes = {
-    
+  scrollHandler: PropTypes.func,
+  render: PropTypes.func,
+  className: PropTypes.string
+}
+
+ScrollWrapper.defaultProps = {
+  scrollHandler: () => {},
+  render: () => {},
+  className: ''
 }
 
 

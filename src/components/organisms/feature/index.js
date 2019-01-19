@@ -41,7 +41,6 @@ class Feature extends React.Component {
       this.contentRef.current.hideItems();
       if (this.state.isRevealed) this.setState({ isRevealed: false })
     }
-
   }
 
   render() {

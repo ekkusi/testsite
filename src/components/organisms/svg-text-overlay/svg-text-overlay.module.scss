@@ -19,7 +19,7 @@
 .topLayer {
   opacity: 0;
 
-  @media (min-width: $bp-mobile) {
+  @media (min-width: $bp-laptop) {
     position: absolute;
     top: 0;
     left: 0;
@@ -51,8 +51,8 @@
 }
 
 .svg {
-  width: 70vw;
-  height: 15vw;
+  width: 80vw;
+  height: 20vw;
 
   .maskRect {
     fill: $main;
@@ -70,8 +70,8 @@
   }
 
   @media (min-width: $bp-laptop) {
-    width: 855px;
-    height: 245px;
+    width: 1000px;
+    height: 400px;
 
     text {
       font-size: 122px;

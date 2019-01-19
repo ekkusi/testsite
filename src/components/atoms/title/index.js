@@ -15,15 +15,25 @@ export const TitleSize = {
   SUBSUB: 'h3'
 }
 
-const Title = ({ theme, size, children, className }) => {
-  if (size === TitleSize.MAIN) return <h1 className={classnames(styles.title, styles[theme], className)}>{children}</h1>
-  else if (size === TitleSize.SUB) return <h2 className={classnames(styles.title, styles[theme], className)}>{children}</h2>
-  else return <h3 className={classnames(styles.title, styles[theme], className)}>{children}</h3>
+export const TitleAlign = {
+  CENTER: 'center',
+  LEFT: 'left',
+  RIGHT: 'right'
+}
+
+const Title = ({ theme, size, align, children, className }) => {
+  if (size === TitleSize.MAIN) 
+    return <h1 className={classnames(styles.title, styles[theme], className)} style={{textAlign: align}}>{children}</h1>
+  else if (size === TitleSize.SUB) 
+    return <h2 className={classnames(styles.title, styles[theme], className)} style={{textAlign: align}}>{children}</h2>
+  else 
+    return <h3 className={classnames(styles.title, styles[theme], className)} style={{textAlign: align}}>{children}</h3>
 }
 
 Title.propTypes = {
   theme: PropTypes.oneOf(Object.values(TitleTheme)),
   size: PropTypes.oneOf(Object.values(TitleSize)),
+  align: PropTypes.oneOf(Object.values(TitleAlign)),
   children: PropTypes.node,
   className: PropTypes.string
 }
@@ -31,6 +41,7 @@ Title.propTypes = {
 Title.defaultProps = {
   theme: TitleTheme.DEFAULT,
   size: TitleSize.MAIN,
+  align: TitleAlign.CENTER,
   className: '',
   children: ''
 }
